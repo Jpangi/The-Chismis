@@ -14,6 +14,12 @@ const PostSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  location: {
+    type: {
+      type: { type: String, default: 'Point' },
+      coordinates: [Number],
+    },
+  },
   created_at: {
     type: Date,
     default: Date.now,
