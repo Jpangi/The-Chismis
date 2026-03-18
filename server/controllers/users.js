@@ -7,15 +7,17 @@ const SALT_LENGTH = 12;
 
 /* --------SIGNUP CONTROLLER-------- */
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
     const emailExists = await User.findOne({ email });
-    if (emailExists) return res.status(404).json({ message: 'Email already in use' });
+    const usernameExists = await User.findOne({ username });
+    if (emailExists || usernameExists) return res.status(404).json({ message: 'Email or username already in use' });
 
     // hashes the password from the user
     const hashedPassword = bcrypt.hashSync(password, SALT_LENGTH);
     const user = await User.create({
+      username,
       email,
       password: hashedPassword,
     });
@@ -37,10 +39,10 @@ const register = async (req, res) => {
 
 /* --------LOGIN CONTROLLER-------- */
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: 'email not found' });
+    const user = await User.findOne({ username });
+    if (!user) return res.status(404).json({ message: 'username not found' });
 
     const matchedPassword = bcrypt.compareSync(password, user.password);
     if (!matchedPassword) return res.status(404).json({ message: 'Password is incorrect' });
