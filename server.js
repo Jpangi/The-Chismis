@@ -6,10 +6,13 @@ const app = express();
 const mongoose = require('mongoose');
 
 const user = require('./server/routes/user');
+const posts = require('./server/routes/Posts');
+
 /* ---MIDDLEWARE--- */
 app.use(express.json());
 
 app.use('/users', user);
+app.use('/posts', posts);
 /* ---DB CONNECTION--- */
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('connected', () => {
