@@ -27,13 +27,6 @@ const editPost = async (req, res) => {
   }
 };
 // TODO: function to delete a post
-const deletePost = async (req, res) => {
-  try {
-
-  } catch (error) {
-
-  }
-};
 
 // TODO: function to show all posts in my area
 
