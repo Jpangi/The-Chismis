@@ -23,13 +23,23 @@ const editPost = async (req, res) => {
     );
     return res.status(201).json(editPosts);
   } catch (error) {
-    return res.status(400).json({ message: 'error editing post', error });
+    return res.status(400).json({ message: 'Error editing post', error });
   }
 };
 // TODO: function to delete a post
-
+const deletePost = async (req, res) => {
+  try {
+    const deletePosts = await Posts.findByIdAndDelete(
+      req.params.postsId,
+      req.body,
+    );
+    return res.status(201).json(deletePosts);
+  } catch (error) {
+    return res.status(400).json({ message: 'Error deleting posts', error });
+  }
+};
 // TODO: function to show all posts in my area
 
 // TODO: function to comment on a post
 
-module.exports = { createPost, editPost };
+module.exports = { createPost, editPost, deletePost };
