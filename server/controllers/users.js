@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/Users');
 
-const createToken = (id) => { jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' }); };
+const createToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 const SALT_LENGTH = 12;
 
 /* --------SIGNUP CONTROLLER-------- */
